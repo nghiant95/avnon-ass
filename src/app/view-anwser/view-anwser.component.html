@@ -1,0 +1,27 @@
+<div>
+  <div *ngFor="let ques of listQuestion">
+    <div class="question">{{ ques.question}} </div>
+    <div *ngIf="ques.type == 1">
+      <div *ngIf="ques.answer && ques.answer.length > 0" >
+        <div *ngFor="let ans of ques.answer">
+          <div class="question-anwser" *ngIf="ans.selected">
+            {{ ans.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="ques.type == 2">
+      <div *ngIf="ques.answer && ques.answer.length > 0" >
+        <div *ngFor="let ans of ques.answer">
+          <div class="question-anwser" *ngIf="ans.selected">
+            {{ ans.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="back-question">
+
+    <a class="blue" (click)="goToBack()"><u>Back to Forms Builder</u></a>
+  </div>
+</div>

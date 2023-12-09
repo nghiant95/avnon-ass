@@ -1,0 +1,30 @@
+<div>
+  <form>
+    <div class="question" *ngFor="let ques of listQuestion">
+      <div class="question-content">{{ ques.question}} <span class="question-require" *ngIf="ques.isRequire">*</span>
+      </div>
+      <div *ngIf="ques.type === 1">
+        <div *ngIf="ques.answer && ques.answer.length > 0">
+          <div *ngFor="let ans of ques.answer">
+             <textarea rows="4" [(ngModel)]="ques.answer[0].name" [ngModelOptions]="{standalone: true}">
+               </textarea>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="ques.type === 2">
+        <div *ngIf="ques.answer && ques.answer.length > 0">
+          <div *ngFor="let ans of ques.answer">
+            <input type="checkbox" [(ngModel)]="ans.selected" [ngModelOptions]="{standalone: true}">
+            <label> {{ans.name}} </label><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="add-question">
+    <a class="blue" (click)="addNewQuestion()"><u>Add new Question</u></a>
+  </div>
+  <div class="add-question">
+    <a class="blue" (click)="goToReview()">Review my answers ></a>
+  </div>
+</div>

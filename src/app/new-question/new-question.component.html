@@ -1,0 +1,44 @@
+<div>
+  <div class="question-title">Add new Question</div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="question-padding">
+      <select name="checkbox list" formControlName="type">
+        <option value="1">Paragraph</option>
+        <option value="2">Checkbox list</option>
+      </select>
+    </div>
+
+    <div class="question-padding">
+      <input placeholder="Type question here" formControlName="question"/>
+    </div>
+
+    <ng-container *ngIf="form.get('type')?.value == 2">
+      <ng-container *ngFor="let item of listAnser">
+        <div class="question-padding">
+          <input [(ngModel)]="item.name" [ngModelOptions]="{standalone: true}" placeholder="Add Answer Option"/>
+        </div>
+      </ng-container>
+
+      <div class="question-padding" *ngIf="listAnser.length < 5">
+        <a (click)="addNewAnser()">
+          <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+          Add another answer</a>
+      </div>
+    </ng-container>
+
+    <div class="question-padding">
+      <input type="checkbox" formControlName="isSpecify">
+      <label> Allow user to specify their own answer</label><br>
+    </div>
+
+    <div class="question-padding">
+      <input type="checkbox" formControlName="isRequire">
+      <label> This field is required</label><br>
+    </div>
+
+    <div class="question-submit">
+      <button type="submit">Submit</button>
+    </div>
+  </form>
+
+</div>

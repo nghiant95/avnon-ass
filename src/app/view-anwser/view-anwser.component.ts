@@ -12,36 +12,7 @@ import { Store } from '@ngrx/store';
 })
 export class ViewAnwserComponent implements OnInit, OnDestroy {
 
-  listQuestion: Question[] = [
-    {
-      type: 1,
-      question: 'Please tell us about yourself',
-      answer: [
-        {
-          name: 'wdqweqwe qw erq werqw erqw er qwe',
-          selected: false
-        }
-      ],
-      isSpecify: false,
-      isRequire: true
-    },
-    {
-      type: 2,
-      question: 'Please select the languages you know ',
-      answer: [
-        {
-          name: 'Typescript',
-          selected: true
-        },
-        {
-          name: 'Python',
-          selected: false
-        }
-      ],
-      isSpecify: false,
-      isRequire: true
-    }
-  ];
+  listQuestion: Question[] = [];
 
   private destroyed$ = new Subject();
 
@@ -53,8 +24,7 @@ export class ViewAnwserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.store.select(StateSelectors.selectData).pipe(
       takeUntil(this.destroyed$),
-    ).subscribe((res) => {
-      console.log(res);
+    ).subscribe((res: Question[]) => {
       if(res){
         this.listQuestion = [...res];
       }
@@ -67,7 +37,6 @@ export class ViewAnwserComponent implements OnInit, OnDestroy {
   }
 
   goToBack(): void {
-    console.log('goToBack');
     this.router.navigate(['form/builder']);
   }
 }

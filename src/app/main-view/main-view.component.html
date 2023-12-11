@@ -6,7 +6,7 @@
       <div *ngIf="ques.type === 1">
         <div *ngIf="ques.answer && ques.answer.length > 0">
           <div *ngFor="let ans of ques.answer">
-             <textarea rows="4" [(ngModel)]="ques.answer[0].name" [ngModelOptions]="{standalone: true}">
+             <textarea rows="4" [(ngModel)]="ans.name" [ngModelOptions]="{standalone: true}">
                </textarea>
           </div>
         </div>
@@ -14,17 +14,22 @@
       <div *ngIf="ques.type === 2">
         <div *ngIf="ques.answer && ques.answer.length > 0">
           <div *ngFor="let ans of ques.answer">
-            <input type="checkbox" [(ngModel)]="ans.selected" [ngModelOptions]="{standalone: true}">
+            <input type="checkbox" [(ngModel)]="ans.selected" (ngModelChange)="changeCheckboxAns(ans, ques)"
+                   [ngModelOptions]="{standalone: true}">
             <label> {{ans.name}} </label><br>
           </div>
         </div>
+
+        <ng-container *ngIf="ques.isSpecify && ques.otherSelected">
+          <input [(ngModel)]="ques.otherAnswer" [ngModelOptions]="{standalone: true}">
+        </ng-container>
       </div>
     </div>
   </form>
   <div class="add-question">
     <a class="blue" (click)="addNewQuestion()"><u>Add new Question</u></a>
   </div>
-  <div class="add-question">
-    <a class="blue" (click)="goToReview()">Review my answers ></a>
+  <div class="review-question" *ngIf="listQuestion.length > 0">
+    <a class="review-question-button" (click)="goToReview()">Review my answers ></a>
   </div>
 </div>

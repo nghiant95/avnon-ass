@@ -4,6 +4,8 @@ export interface Question{
   answer: Answer[]
   isSpecify: boolean
   isRequire: boolean
+  otherAnswer: string
+  otherSelected: boolean
 }
 
 export interface Answer{

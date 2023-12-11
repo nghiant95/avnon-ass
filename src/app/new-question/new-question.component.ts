@@ -15,7 +15,7 @@ export class NewQuestionComponent implements OnInit, OnDestroy {
 
   listQuestion: Question[] = [];
   form!: FormGroup;
-  listAnser: Answer[]=[];
+  listAnswer: Answer[]=[];
 
   private destroyed$ = new Subject();
 
@@ -45,7 +45,7 @@ export class NewQuestionComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       type : [1, Validators.required],
       question: ['', Validators.required],
-      anwser: [''],
+      answer: [null],
       isSpecify  : [false],
       isRequire  : [false],
     });
@@ -53,7 +53,7 @@ export class NewQuestionComponent implements OnInit, OnDestroy {
   }
 
   addNewAnser(): void {
-    this.listAnser.push({
+    this.listAnswer.push({
       selected: false,
       name: ''
     });
@@ -65,7 +65,7 @@ export class NewQuestionComponent implements OnInit, OnDestroy {
     }
 
     this.form.get('type')?.setValue(Number(this.form.get('type')?.value) );
-    this.form.get('anwser')?.setValue(this.listAnser);
+    this.form.get('answer')?.setValue(this.listAnswer);
 
     this.listQuestion.push(this.form.value);
     this.store.dispatch(
